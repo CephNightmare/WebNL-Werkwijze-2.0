@@ -1,0 +1,21 @@
+﻿/// <reference path='../_reference.scss' />
+
+/// Add media query for xxlarge sized screens
+/// @access public
+/// @param {Media} @media - Name of the media query
+@mixin respond-to($media) {
+    $breakpoint: map-get($breakpoints, $media);
+
+    @media only screen and (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+/// Add media query for specific heights
+/// @access public
+/// @param {Height} @height - Height in pixels to respond to. No predefined map is used because these things are almost always custom
+@mixin respond-to-height($height) {
+    @media only screen and (min-height: $height) {
+        @content;
+    }
+}

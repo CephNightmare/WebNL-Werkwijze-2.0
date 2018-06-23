@@ -1,0 +1,25 @@
+﻿/// <reference path='../_reference.scss' />
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+::selection {
+    background-color: map-deep-get($colors, 'red', 'light');
+    color: map-deep-get($colors, 'white', 'default');
+}

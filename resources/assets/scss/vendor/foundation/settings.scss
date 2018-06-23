@@ -1,0 +1,82 @@
+//  Foundation for Sites Settings
+//  -----------------------------
+//
+//  Table of Contents:
+//
+//   1. Global
+//   2. Breakpoints
+//   3. The Grid
+//   4. Base Typography
+//   5. Typography Helpers
+//   6. Abide
+//   7. Accordion
+//   8. Accordion Menu
+//   9. Badge
+//  1. Breadcrumbs
+//  11. Button
+//  12. Button Group
+//  13. Callout
+//  14. Card
+//  15. Close Button
+//  16. Drilldown
+//  17. Dropdown
+//  18. Dropdown Menu
+//  19. Forms
+//  2. Label
+//  21. Media Object
+//  22. Menu
+//  23. Meter
+//  24. Off-canvas
+//  25. Orbit
+//  26. Pagination
+//  27. Progress Bar
+//  28. Responsive Embed
+//  29. Reveal
+//  3. Slider
+//  31. Switch
+//  32. Table
+//  33. Tabs
+//  34. Thumbnail
+//  35. Title Bar
+//  36. Tooltip
+//  37. Top Bar
+
+@import 'foundation-sites/scss/util/util';
+
+// 1. Global
+// ---------
+
+$global-font-size: 16px;
+$global-width: rem-calc(1440);
+$global-lineheight: 1.5;
+$foundation-palette: ( primary: #1779ba, secondary: #767676, success: #3adb76, warning: #ffae00, alert: #cc4b37, );
+$body-background: #ffffff;
+$body-font-color: #374450;
+$body-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$body-antialiased: true;
+$global-margin: 1rem;
+$global-padding: 1rem;
+$global-weight-normal: normal;
+$global-weight-bold: bold;
+$global-radius: 0;
+$global-text-direction: ltr;
+$global-flexbox: false;
+$print-transparent-backgrounds: true;
+
+@include add-foundation-colors;
+
+// 2. Breakpoints
+// --------------
+
+$breakpoints: ( small: 0, small-medium: 500px, medium: 768px, large: 1024px, xlarge: 1200px, xxlarge: 1480px, );
+$print-breakpoint: large;
+$breakpoint-classes: (small medium large xlarge xxlarge);
+
+// 3. The Grid
+// -----------
+
+$grid-row-width: $global-width;
+$grid-column-count: 24;
+$grid-column-gutter: (small: 32px, medium: 16px, large: 20px);
+$grid-column-align-edge: true;
+$block-grid-max: 8;
