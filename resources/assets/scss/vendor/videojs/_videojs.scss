@@ -1,0 +1,9 @@
+.video-js {
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+.vjs-has-started,
+.vjs-controls-enabled {
+    opacity: 1;
+}

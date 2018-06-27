@@ -1,22 +1,21 @@
-
 // Variables and sass helpers
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/placeholders';
-@import 'abstracts/variables';
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/placeholders";
+@import "abstracts/variables";
 
 // Grid
-@import 'vendor/all';
+@import "vendor/all-vendors";
 
 // base
-@import 'base/all';
+@import "base/all-base";
 
 // Layout
-@import 'layout/all';
+@import "layout/all-layout";
 
 // Components
-@import 'components/all';
+@import "components/all-components";
 
 // Page specific styles
 // shame file for lousy css hacks and importants
-@import 'shame';
+@import "shame";

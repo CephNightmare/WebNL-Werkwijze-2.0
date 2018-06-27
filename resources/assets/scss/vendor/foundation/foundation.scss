@@ -1,6 +1,16 @@
+@import 'foundation-sites/scss/util/util';
 @import 'foundation-sites/scss/foundation';
 
 @include foundation-global-styles;
-@include foundation-flex-grid;
+@include foundation-xy-grid-classes(
+        $base-grid: true,
+        $margin-grid: true,
+        $padding-grid: true,
+        $block-grid: true,
+        $collapse: true,
+        $offset: true,
+        $vertical-grid: false,
+        $frame-grid: false
+)
 @include foundation-visibility-classes;
-@include foundation-flex-classes;
+@include foundation-prototype-classes;

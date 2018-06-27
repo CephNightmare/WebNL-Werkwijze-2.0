@@ -99,7 +99,7 @@
     "selector-attribute-operator-space-after": "never",
     "selector-attribute-operator-space-before": "never",
     "selector-attribute-quotes": "always",
-    "selector-class-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "selector-class-pattern": "^[-_a-z0-9]+$",
     "selector-combinator-space-after": "always",
     "selector-combinator-space-before": "always",
     "selector-descendant-combinator-no-non-space": true,
@@ -124,7 +124,7 @@
 
     "shorthand-property-no-redundant-values": true,
     "string-no-newline": true,
-    "string-quotes": "single",
+    "string-quotes": "double",
     "time-min-milliseconds": 100,
 
     "unit-case": "lower",

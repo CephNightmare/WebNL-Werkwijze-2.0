@@ -10,12 +10,30 @@ module.exports = function ()
     var config = {
         paths: paths,
         js: {
-            src: [
-                paths.node + 'vue/dist/vue.js',
-                paths.node + 'blazy/blazy.min.js',
-                "js/**/*.js"
-            ],
-            dest: paths.dist + 'js/'
+            vendors: {
+                src: [
+                    paths.node + "barba.js/dist/barba.js",
+                    paths.node + "blazy/blazy.js",
+                    paths.node + "moment/moment.js",
+                    paths.node + "es6-promise/dist/es6-promise.js",
+                    paths.node + "video.js/dist/video.js",
+                    paths.node + "pikaday/pikaday.js",
+                    paths.node + "vee-validate/dist/vee-validate.js",
+                    paths.node + "vuex/dist/vuex.js",
+                    paths.node + "vue/dist/vue.js",
+                ],
+                dest: paths.dist + 'js/',
+            },
+            main: {
+                src: [
+                    paths.src + "js/global.js",
+                    paths.src + "js/api/**/*.js",
+                    paths.src + "js/store/**/*.js",
+                    paths.src + "js/components/**/*.js",
+                ],
+                dest: paths.dist + 'js/',
+                watch: paths.src + 'js/**/*.js',
+            },
         },
         scss: {
             watch: paths.src + 'scss/**/*.scss',

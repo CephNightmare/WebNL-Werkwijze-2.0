@@ -1,0 +1,4 @@
+.cell {
+    background-color: map-deep-get($colors, "red", "default");
+    margin: rem-calc(12) 0;
+}

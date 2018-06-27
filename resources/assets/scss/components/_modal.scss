@@ -1,0 +1,70 @@
+.modal {
+    $modal: &;
+
+    &__contentWrapper {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        margin-left: 100%;
+        background-color: rgba(map-deep-get($colors, "black", "default"), .5);
+        transition: margin 0s linear .3s, opacity .3s ease-in-out;
+    }
+
+    &__content {
+        transform: translateY(40px);
+        transition: transform .3s cubic-bezier(.2, 0, 0, 1);
+        background-color: map-deep-get($colors, "white", "default");
+        padding: rem-calc(48) rem-calc(24) rem-calc(24);
+        width: rem-calc(500);
+        margin: rem-calc(16);
+        height: 80vh;
+        position: relative;
+
+        @include breakpoint(medium) {
+            margin: 0;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        right: rem-calc(16);
+        top: rem-calc(16);
+
+        @include breakpoint(medium) {
+            top: rem-calc(24);
+            right: rem-calc(24);
+        }
+
+        svg {
+            width: rem-calc(24);
+            height: rem-calc(24);
+            fill: map-deep-get($colors, "gray", "darker");
+        }
+    }
+
+    &--visible {
+        #{$modal}__bg {
+            transition: margin 0s linear, opacity .3s ease-in-out;
+            margin-left: 0;
+            opacity: 1;
+        }
+
+        #{$modal}__content{
+            transform: translateY(0);
+        }
+
+        #{$modal}__contentWrapper {
+            transition: margin 0s linear, opacity .3s ease-in-out, transform .3s cubic-bezier(.2, 0, 0, 1);
+            opacity: 1;
+            margin-left: 0;
+            transform: translateY(0);
+        }
+    }
+}

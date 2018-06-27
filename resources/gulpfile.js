@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     reporter = require('postcss-reporter'),
     sass = require('gulp-sass'),
     syntax_scss = require('postcss-scss'),
+    cssnext = require('postcss-cssnext'),
     stylelint = require('stylelint'),
     uglify = require('gulp-uglify'),
     cache = require('gulp-cache'),
@@ -23,24 +24,10 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
-    newer = require('gulp-newer');
+    newer = require('gulp-newer'),
+    babel = require("gulp-babel");
 
 var config = require("./config/gulp.conf.js")();
-
-
-// -------------------
-// Error Handlers
-// -------------------
-
-var onScssError = function(error) {
-    util.log('SCSS Error', util.colors.red('123'));
-    console.log(error);
-    this.emit('end');
-};
-
-// -------------------
-// Stylelint configuration
-// -------------------
 
 var stylelintConfig = require('./stylelint.json');
 
@@ -52,20 +39,28 @@ var processors = [
     })
 ];
 
+
 gulp.task('js', function () {
-    return gulp.src(config.js.src)
+    return gulp.src(config.js.main.src)
         .pipe(sourcemaps.init())
-        .pipe(expect(config.js.src))
+        .pipe(expect(config.js.main.src))
+        .pipe(babel())
         .pipe(concat('app.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(config.js.dest));
+        .pipe(gulp.dest(config.js.main.dest));
 });
 
-// -------------------
-// Stylesheet Pipeline
-// Compresses and moves all assets (images/fonts) to dist folder
-// -------------------
+
+gulp.task('vendors', function () {
+    return gulp.src(config.js.vendors.src)
+        .pipe(sourcemaps.init())
+        .pipe(expect(config.js.vendors.src))
+        .pipe(concat('vendors.min.js'))
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(config.js.vendors.dest));
+});
 
 
 gulp.task('scss_lint', function () {
@@ -76,9 +71,7 @@ gulp.task('scss_lint', function () {
 
 gulp.task('scss', ['scss_lint'], function () {
     return gulp.src(config.scss.src)
-        .pipe(plumber({
-            errorHandler: onScssError
-        }))
+        .pipe(plumber())
         .pipe(expect(config.scss.src))
         .pipe(sass({
             errLogToConsole: true,
@@ -101,11 +94,13 @@ gulp.task('scss', ['scss_lint'], function () {
                 }
             }
         }))
+        // .pipe(postcss([cssnext()]))
         .pipe(sourcemaps.write())
         .pipe(rename({extname: '.min.css'}))
         .pipe(gulp.dest(config.scss.dest))
         .pipe(browserSync.stream());
 });
+
 
 //Checks feature usage, shows error when feature is being used that is not supported by the defined browsers
 gulp.task('doiuse', function () {
@@ -129,6 +124,7 @@ gulp.task('doiuse', function () {
         ]))
 });
 
+
 // Browser sync
 gulp.task('browser-sync', function () {
     browserSync.init(
@@ -141,11 +137,14 @@ gulp.task('browser-sync', function () {
     });
 });
 
+
 gulp.task('clean', function(cb) {
-    return del([config.paths.dist + '/css', config.paths.dist + '/img', config.paths.dist + '/js'], {
+    return del(
+        [config.paths.dist + '/css', config.paths.dist + '/img', config.paths.dist + '/js'], {
         force: true
     });
 });
+
 
 gulp.task('images', function() {
     return gulp.src(config.images.src)
@@ -184,19 +183,24 @@ gulp.task('images', function() {
         .pipe(gulp.dest(config.images.dest));
 });
 
+
 gulp.task('fonts', function () {
     return gulp.src(config.fonts.src)
         .pipe(expect(config.fonts.src))
         .pipe(gulp.dest(config.fonts.dest));
 });
 
+
 gulp.task('assets', ['images', 'fonts']);
 
+
 gulp.task('default', ['scss', 'js', 'assets']);
+
 
 gulp.task('watch', ['browser-sync'], function () {
     gulp.watch(config.scss.watch, ['scss']);
     gulp.watch(config.images.watch, ['images']);
-    gulp.watch(config.js.src, ['js']);
+    gulp.watch(config.js.main.watch, ['js']);
+    gulp.watch(config.js.vendors.watch, ['vendors']);
 });
 
